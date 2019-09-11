@@ -6,15 +6,13 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 13:17:27 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 17:33:42 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:23:30 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
-
-# define BUFF_SIZE 128
 
 typedef struct		s_list
 {
