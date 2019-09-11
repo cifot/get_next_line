@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 12:21:44 by nharra            #+#    #+#              #
-#    Updated: 2019/09/11 12:54:14 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/11 13:09:14 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,23 +83,25 @@ SOURCES_SINGLE_LIST =\
 	ft_lstiter.c\
 	ft_lstmap.c\
 
-OBJECTS_DIR = obj
-
 SOURCES_MEMORY_DIR = memory
 SOURCES_SINGLE_LIST_DIR = singly_linked_list
 SOURCES_DOUBLE_LIST_DIR = double_linked_list
 
 SOURCE = $(notdir $(SOURCES))
 
+SOURCES = \
+	$(addprefix $(SOURCES_MEMORY_DIR)/, $(SOURCES_MEMORY))\
+	$(addprefix $(SOURCES_SINGLE_LIST_DIR)/, $(SOURCES_SINGLE_LIST))\
+	$(addprefix $(SOURCES_DOUBLE_LIST_DIR)/, $(SOURCES_DOUBLE_LIST))\
+
+OBJECTS_DIR = obj
+
 OBJ = $(SOURCE:.c=.o)
 
 OBJECTS = \
 	$(addprefix $(OBJECTS_DIR)/, $(OBJ))\
 
-SOURCES = \
-	$(addprefix $(SOURCES_MEMORY_DIR)/, $(SOURCES_MEMORY))\
-	$(addprefix $(SOURCES_SINGLE_LIST_DIR)/, $(SOURCES_SINGLE_LIST))\
-	$(addprefix $(SOURCES_DOUBLE_LIST_DIR)/, $(SOURCES_DOUBLE_LIST))\
+INCLUDE_DIR = includes
 
 NAME = libft.a
 
@@ -108,8 +110,8 @@ all: $(NAME)
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)
 
-$(OBJECTS): libft.h $(OBJECTS_DIR)
-	gcc -c -I. $(SOURCES) $(FLAGS)
+$(OBJECTS): $(addprefix $(INCLUDE_DIR)/, libft.h) $(OBJECTS_DIR)
+	gcc -c -I$(INCLUDE_DIR) $(SOURCES) $(FLAGS)
 	mv $(OBJ) $(OBJECTS_DIR)
 
 $(NAME): $(OBJECTS)

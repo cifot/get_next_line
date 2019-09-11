@@ -6,11 +6,11 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 11:56:23 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 12:34:51 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 13:13:25 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "dlist.h"
 
 void	ft_dlist_delone(t_dlist *lst, void (*del)(void *))
 {

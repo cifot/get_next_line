@@ -6,11 +6,11 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 11:49:13 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 12:43:50 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 13:13:10 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "dlist.h"
 
 t_dlist		*ft_dlist_find(t_dlist *lst, void *data, int (*f)(void *, void *))
 {

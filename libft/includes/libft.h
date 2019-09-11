@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 13:17:27 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 12:44:53 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 13:12:55 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct		s_dlist
-{
-	void			*content;
-	size_t			content_size;
-	int				tag;
-	struct s_dlist	*next;
-	struct s_dlist	*prev;
-}					t_dlist;
-
-void				ft_dlist_delone(t_dlist *lst, void (*del)(void *));
-void				ft_dlist_del(t_dlist **lst, void (*del)(void *));
-t_dlist				*ft_dlist_find(t_dlist *lst, void *data, int (*f)(void *, void *));
-t_dlist				*ft_dlist_push(t_dlist *lst, void *data, size_t size, int tag);
-void				ft_dlist_simple_delone(t_dlist *lst);
-void				ft_dlist_simple_del(t_dlist **lst);
-t_dlist				*ft_dlist_find_tag(t_dlist *lst, int tag);
 
 size_t				ft_strlen(const char *s);
 int					ft_atoi(const char *str);
