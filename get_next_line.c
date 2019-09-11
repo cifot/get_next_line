@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 13:18:10 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 21:04:22 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/12 00:52:35 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,31 @@ int		make_str(char *str, char **line, char **find_chr)
 	return (0);
 }
 
-int		ft_read_from_fd(t_dlist *lst, const int fd, char **line)
+int		ft_read_from_fd(t_dlist **lst, const int fd, char **line)
 {
 	char	buf[BUFF_SIZE + 1];
 	int		res;
 	char	*find_chr;
+	int		flag;
 
 	find_chr = NULL;
+	flag = 0;
 	while ((res = read(fd, buf, BUFF_SIZE)))
 	{
+		flag = 1;
 		if (res == -1)
 			return (-1);
 		buf[res] = '\0';
-		make_str(buf, line, &find_chr);
+		if (make_str(buf, line, &find_chr))
+			return (-1);
 		if (find_chr)
 		{
-			ft_dlist_push(lst, find_chr + 1, ft_strlen(find_chr + 1) + 1, fd);
+			if (!ft_dlist_push(lst, find_chr + 1, ft_strlen(find_chr + 1) + 1, fd))
+				return (-1);
 			return (1);
 		}
 	}
-	return (0);
+	return (flag);
 }
 
 int		ft_read_from_lst(t_dlist *ptr, char **line)
@@ -59,6 +64,7 @@ int		ft_read_from_lst(t_dlist *ptr, char **line)
 		return (-1);
 	if (find_chr == NULL)
 	{
+		printf("AAA\n");
 		ft_dlist_simple_delone(ptr);
 		return (0);
 	}
@@ -84,16 +90,17 @@ int		get_next_line(const int fd, char **line)
 	current = ft_dlist_find_tag(lst, fd);
 	if (current)
 	{
-		printf("*%s*\n", current->content);
 		if ((res = ft_read_from_lst(current, line)) == -1)
 			return (-1);
 		if (res == 0)
-			return (ft_read_from_fd(lst, fd, line));
+		{
+			return ((ft_read_from_fd(&lst, fd, line) == -1) ? -1 : 1);
+		}
 		else
 			return (1);
 	}
 	else
 	{
-		return (ft_read_from_fd(lst, fd, line));
+		return (ft_read_from_fd(&lst, fd, line));
 	}
 }
