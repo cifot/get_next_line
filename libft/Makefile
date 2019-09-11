@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 12:21:44 by nharra            #+#    #+#              #
-#    Updated: 2019/09/11 20:04:15 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/11 20:13:38 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,17 +107,17 @@ INCLUDE_DIR = includes
 
 NAME = libft.a
 
-vpath %c $(SOURCES_MEMORY_DIR) $(SOURCES_SINGLE_LIST_DIR) $(SOURCES_DOUBLE_LIST_DIR)
+vpath %.c $(SOURCES_MEMORY_DIR) $(SOURCES_SINGLE_LIST_DIR) $(SOURCES_DOUBLE_LIST_DIR)
 
 all: $(NAME)
 
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)
 
-$(OBJECTS_DIR)/%.o: %.c $(OBJECTS_DIR) $(INCLUDE_DIR)/libft.h $(INCLUDE_DIR)/dlist.h
+$(OBJECTS_DIR)/%.o: %.c $(INCLUDE_DIR)/libft.h $(INCLUDE_DIR)/dlist.h
 	gcc $(FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS_DIR) $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
