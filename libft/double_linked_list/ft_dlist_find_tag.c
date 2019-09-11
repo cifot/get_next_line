@@ -6,13 +6,13 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 12:40:55 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 13:13:11 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 17:21:26 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dlist.h"
 
-t_dlist		*ft_dlist_find_tag(t_dlist *lst, int tag)
+t_dlist		*ft_dlist_find_tag(t_dlist const *lst, const int tag)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -20,5 +20,5 @@ t_dlist		*ft_dlist_find_tag(t_dlist *lst, int tag)
 	{
 		lst = lst->next;
 	}
-	return (lst);
+	return ((t_dlist *)lst);
 }

@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 12:21:44 by nharra            #+#    #+#              #
-#    Updated: 2019/09/11 13:09:14 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/11 20:04:15 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SOURCES_MEMORY =\
 	ft_strsplit.c\
 	ft_strsub.c\
 	ft_strtrim.c\
+	ft_safe_strcat.c\
+
 
 SOURCES_DOUBLE_LIST =\
 	ft_dlist_del.c\
@@ -99,20 +101,21 @@ OBJECTS_DIR = obj
 OBJ = $(SOURCE:.c=.o)
 
 OBJECTS = \
-	$(addprefix $(OBJECTS_DIR)/, $(OBJ))\
+	$(addprefix $(OBJECTS_DIR)/, $(OBJ))
 
 INCLUDE_DIR = includes
 
 NAME = libft.a
+
+vpath %c $(SOURCES_MEMORY_DIR) $(SOURCES_SINGLE_LIST_DIR) $(SOURCES_DOUBLE_LIST_DIR)
 
 all: $(NAME)
 
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)
 
-$(OBJECTS): $(addprefix $(INCLUDE_DIR)/, libft.h) $(OBJECTS_DIR)
-	gcc -c -I$(INCLUDE_DIR) $(SOURCES) $(FLAGS)
-	mv $(OBJ) $(OBJECTS_DIR)
+$(OBJECTS_DIR)/%.o: %.c $(OBJECTS_DIR) $(INCLUDE_DIR)/libft.h $(INCLUDE_DIR)/dlist.h
+	gcc $(FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)

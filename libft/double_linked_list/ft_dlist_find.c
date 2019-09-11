@@ -6,13 +6,14 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 11:49:13 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 13:13:10 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/11 17:22:15 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dlist.h"
 
-t_dlist		*ft_dlist_find(t_dlist *lst, void *data, int (*f)(void *, void *))
+t_dlist		*ft_dlist_find(t_dlist const *lst, void *data,
+							int (*f)(void *, void *))
 {
 	if (lst == NULL || f == NULL)
 		return (NULL);
@@ -20,5 +21,5 @@ t_dlist		*ft_dlist_find(t_dlist *lst, void *data, int (*f)(void *, void *))
 	{
 		lst = lst->next;
 	}
-	return (lst);
+	return ((t_dlist *)lst);
 }

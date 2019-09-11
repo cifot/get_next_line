@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlist_del.c                                     :+:      :+:    :+:   */
+/*   ft_safe_strcat.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/11 12:20:34 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/11 16:14:26 by nharra           ###   ########.fr       */
+/*   Created: 2019/09/11 13:52:15 by nharra            #+#    #+#             */
+/*   Updated: 2019/09/11 17:20:36 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dlist.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	ft_dlist_del(t_dlist **lst, void (*del)(void *))
+char	*ft_safe_strcat(char **dest, const char *src)
 {
-	t_dlist *ptr;
+	char	*new;
+	size_t	dest_line;
 
-	if (lst == NULL)
-		return ;
-	while (*lst)
+	dest_line = ft_strlen(*dest);
+	if (!(new = (char *)malloc(dest_line + ft_strlen(src) + 1)))
 	{
-		ptr = *lst;
-		*lst = (*lst)->next;
-		ft_dlist_delone(ptr, del);
+		return (NULL);
 	}
-	*lst = NULL;
+	ft_strcpy(new, *dest);
+	free(*dest);
+	*dest = new;
+	return (strcat(new + dest_line, src));
 }
